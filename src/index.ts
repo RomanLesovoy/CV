@@ -1,7 +1,6 @@
-export class Main {
-  public run = () => {
-    console.log('running...');
-  }
-}
+import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js';
+import './reset.css';
+import './vars.css';
+import './common.css';
 
-export const instance = new Main();
+import './components';

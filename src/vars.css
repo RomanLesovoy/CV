@@ -1,0 +1,22 @@
+:root {
+    /* main */
+    --main-bg-color: #171758;
+    --main-content-gap: 20px;
+    --main-content-bg: transparent;
+
+    /* header */
+    --header-height: 50px;
+    --header-bg-color: white;
+
+    /* footer */
+    --footer-height: 50px;
+    --footer-bg-color: white;
+
+    /* photo */
+    --photo-width: 200px;
+    --photo-height: 200px;
+
+    /* common */
+    --border-default: 2px solid black;
+}
+

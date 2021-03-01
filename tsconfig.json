@@ -1,11 +1,16 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es6",
-    "declaration": true,
-    "outDir": "./dist"
-  },
-  "include": [
-    "src/**/*"
-  ]
+    "baseUrl": "./",
+    "outDir": "./dist/",
+    "lib": ["es6", "dom"],
+    "module": "es2015",
+    "target": "ES6",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  }
 }

@@ -1,0 +1,72 @@
+const path = require('path');
+const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: './src/index.ts',
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 9000,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        use: [
+          {
+            options: {
+              name: "[name].[ext]",
+              outputPath: "images/"
+            },
+            loader: 'file-loader',
+          },
+        ],
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          },
+          { loader: 'sass-loader' }
+        ]
+      }
+    ],
+  },
+  resolve: {
+    extensions: ['.ts', '.js', '.css', '.scss', '.html'],
+  },
+  output: {
+    filename: 'index.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  plugins: [
+    new HtmlWebpackPlugin(
+    {
+      template: 'assets/index.html'
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, "assets/images"), to: path.resolve(__dirname, "dist/images") },
+      ],
+    }),
+  ]
+};
