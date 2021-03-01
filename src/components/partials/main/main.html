@@ -5,12 +5,21 @@
             min-height: calc(100vh - var(--header-height) - var(--footer-height) - (var(--main-content-gap) * 2));
         }
         #main-content {
+            display: flex;
+            color: var(--main-content-color);
             background-color: var(--main-content-bg);
         }
     </style>
     <main>
         <div id="main-content">
             <app-photo photoPath="/images/photo.jpg"></app-photo>
+            <app-tabs>
+                <div class="select-tabs">
+                    <span>tab 1</span>
+                    <span>tab 2</span>
+                </div>
+                <p>Some text</p>
+            </app-tabs>
         </div>
     </main>
 </template>

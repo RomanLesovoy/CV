@@ -1,8 +1,9 @@
 :root {
     /* main */
-    --main-bg-color: #171758;
+    --main-bg-color: #252525;
     --main-content-gap: 20px;
     --main-content-bg: transparent;
+    --main-content-color: white;
 
     /* header */
     --header-height: 50px;

@@ -53,3 +53,16 @@ export function executeIfExists({ searchIn, selector, callback }: ExecuteIfExist
     callback(element);
   }
 }
+
+interface WalkNods {
+  from: HTMLBodyElement | any,
+  func: Function,
+}
+export function walkNodes({ from, func }: WalkNods) {
+  for (let i = 0; i < from.children.length; i++) {
+    const child = from.children[i];
+    if (typeof child === 'object') {
+      func(child);
+    }
+  }
+}
