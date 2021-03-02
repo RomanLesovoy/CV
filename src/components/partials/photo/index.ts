@@ -1,20 +1,21 @@
 import photoDom from './photo.html';
-import {bindTemplate, executeIfExists, ShadowMods, singleton} from '../../../utils';
+import {executeIfExists, singleton} from '../../../utils';
+import HtmlElementExtended from '../../HtmlElementExtended';
 
 const photoPath = 'photoPath';
-export default class Photo extends HTMLElement {
+export default class Photo extends HtmlElementExtended {
   shadow: HTMLBodyElement;
   image: any;
   constructor() {
     super();
     singleton(Photo, this);
-    this.initImage();
-    this.shadow = bindTemplate({
-      object: this,
+    super.run({
+      child: this,
+      bindTemplate: true,
+      templateSelector: '#photo',
       template: photoDom,
-      selector: '#photo',
-      mode: ShadowMods.Closed,
     });
+    this.initImage();
   }
   initImage() {
     if (!this.image) {

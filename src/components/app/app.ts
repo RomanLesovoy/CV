@@ -1,16 +1,17 @@
 import pageDom from './app.html';
 import styles from './app.css';
-import { bindTemplate, ShadowMods, singleton } from '../../utils';
+import {singleton} from '../../utils';
+import HtmlElementExtended from '../HtmlElementExtended';
 
-export default class App extends HTMLElement {
+export default class App extends HtmlElementExtended {
   constructor() {
     super();
     singleton(App, this);
-    bindTemplate({
-      object: this,
+    super.run({
+      child: this,
+      bindTemplate: true,
+      templateSelector: '#app',
       template: pageDom,
-      selector: '#app',
-      mode: ShadowMods.Open,
     });
   }
   connectedCallback() {

@@ -1,16 +1,17 @@
 import headerDom from './header.html';
-import {bindTemplate, executeIfExists, ShadowMods, singleton} from '../../../utils';
+import {executeIfExists, singleton} from '../../../utils';
+import HtmlElementExtended from '../../HtmlElementExtended';
 
-export default class Header extends HTMLElement {
+export default class Header extends HtmlElementExtended {
   shadow: HTMLBodyElement;
   constructor() {
     super();
     singleton(Header, this);
-    this.shadow = bindTemplate({
-      object: this,
+    super.run({
+      child: this,
+      bindTemplate: true,
+      templateSelector: '#header',
       template: headerDom,
-      selector: '#header',
-      mode: ShadowMods.Closed,
     });
   }
   connectedCallback() {

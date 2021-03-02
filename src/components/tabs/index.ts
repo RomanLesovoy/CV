@@ -1,30 +1,36 @@
 import tabsDom from './tabs.html';
-import {bindTemplate, executeIfExists, ShadowMods, singleton, walkNodes} from '../../utils';
+import {executeIfExists, singleton, walkNodes} from '../../utils';
+import HtmlElementExtended from '../HtmlElementExtended';
 
-export default class Tabs extends HTMLElement {
+export default class Tabs extends HtmlElementExtended {
   shadow: HTMLBodyElement;
   tabs: HTMLBodyElement;
   activeTab: any;
+  tabContent: any;
   constructor() {
     super();
-    singleton(Tabs, this);
-    this.shadow = bindTemplate({
-      object: this,
+    super.run({
+      child: this,
+      bindTemplate: true,
+      templateSelector: '#tabs',
       template: tabsDom,
-      selector: '#tabs',
-      mode: ShadowMods.Closed,
+      requiredChildElementsSelectors: ['.select-tabs'],
     });
+    singleton(Tabs, this);
   }
   connectedCallback() {
-    const that = this;
     this.style.flex = '1';
-    if (!that.querySelector('.select-tabs')) {
-      throw 'Should contain {.select-tabs}';
-    }
+    this.setTabs();
+    this.setTabContent();
+    this.setListenersOnTabs();
+    this.setActiveTab();
+  }
+  setTabs() {
+    const that = this;
     if (this.children.length) {
       executeIfExists({
         searchIn: this.shadow,
-        selector: '#tabs-content',
+        selector: '.tabs-content',
         callback: function(content: HTMLBodyElement) {
           walkNodes({
             from: that,
@@ -33,7 +39,7 @@ export default class Tabs extends HTMLElement {
               if (child.classList.value.indexOf('select-tabs') !== -1) {
                 that.tabs = cloned as HTMLBodyElement;
               }
-              content.append(cloned)
+              content.append(cloned);
             },
           });
           while (that.lastElementChild) {
@@ -41,9 +47,17 @@ export default class Tabs extends HTMLElement {
           }
         },
       });
-      this.setListenersOnTabs();
-      this.setActiveTab();
     }
+  }
+  setTabContent() {
+    const that = this;
+    executeIfExists({
+      searchIn: this.shadow,
+      selector: '.selected-tab-content',
+      callback: function(content: HTMLBodyElement) {
+        that.tabContent = content;
+      }
+    })
   }
   setListenersOnTabs() {
     for (let i = 0; i < this.tabs.children.length; i++) {
@@ -61,6 +75,13 @@ export default class Tabs extends HTMLElement {
       }
       this.activeTab = this.tabs.children[tab];
       this.activeTab.classList.add(activeClass);
+      this.setSelectedTabContent(this.activeTab.getAttribute('data-component-name'));
     }
+  }
+  setSelectedTabContent(componentNameToShow: string) {
+    while (this.tabContent.lastElementChild) {
+      this.tabContent.removeChild(this.tabContent.lastElementChild);
+    }
+    this.tabContent.appendChild(document.createElement(componentNameToShow));
   }
 }

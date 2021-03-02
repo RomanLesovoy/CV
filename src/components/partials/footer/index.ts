@@ -1,16 +1,17 @@
 import footerDom from './footer.html';
-import {bindTemplate, ShadowMods, singleton, executeIfExists} from '../../../utils';
+import {singleton, executeIfExists} from '../../../utils';
+import HtmlElementExtended from '../../HtmlElementExtended';
 
-export default class Footer extends HTMLElement {
+export default class Footer extends HtmlElementExtended {
   shadow: HTMLBodyElement;
   constructor() {
     super();
     singleton(Footer, this);
-    this.shadow = bindTemplate({
-      object: this,
+    super.run({
+      child: this,
+      bindTemplate: true,
+      templateSelector: '#footer',
       template: footerDom,
-      selector: '#footer',
-      mode: ShadowMods.Closed,
     });
   }
   connectedCallback() {

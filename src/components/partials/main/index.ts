@@ -1,16 +1,16 @@
 import mainDom from './main.html';
-import { bindTemplate, ShadowMods, singleton } from '../../../utils';
+import {singleton} from '../../../utils';
+import HtmlElementExtended from '../../HtmlElementExtended';
 
-export default class Main extends HTMLElement {
+export default class Main extends HtmlElementExtended {
   constructor() {
     super();
     singleton(Main, this);
-    bindTemplate({
-      object: this,
+    super.run({
+      child: this,
+      bindTemplate: true,
+      templateSelector: '#main',
       template: mainDom,
-      selector: '#main',
-      mode: ShadowMods.Closed,
     });
   }
-  connectedCallback() {}
 }

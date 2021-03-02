@@ -36,7 +36,7 @@ export function bindTemplate({ object, template, selector, mode = ShadowMods.Ope
 }
 
 interface ExecuteIfExistsProps {
-  searchIn: HTMLBodyElement,
+  searchIn: HTMLBodyElement | ShadowRoot,
   selector: string,
   callback: Function,
 }

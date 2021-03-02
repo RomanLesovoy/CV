@@ -4,10 +4,11 @@ import Main from './partials/main';
 import App from './app/app';
 import Tabs from './tabs';
 import Photo from './partials/photo';
+import { TabFirst, TabSecond, TabThird } from './partials/content-components';
 
 import { componentName } from '../utils';
 
-export const components: Array<CustomElementConstructor> = [Header, Footer, Main, Tabs, Photo, App];
+export const components: Array<CustomElementConstructor> = [Header, Footer, Main, Tabs, Photo, TabFirst, TabSecond, TabThird, App];
 
 function defineComponents(components: Array<CustomElementConstructor>) {
   components.forEach((component) => {
