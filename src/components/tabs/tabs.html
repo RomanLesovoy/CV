@@ -4,13 +4,26 @@
             margin-top: 0;
         }
         .select-tabs {
-
+            margin-bottom: 20px;
         }
         .select-tabs span {
+            padding: 5px;
+            display: inline-block;
             cursor: pointer;
+            transition: color .2s ease;
+        }
+        .select-tabs span:hover {
+            color: var(--tab-hover-color);
         }
         .select-tabs span.active {
-            color: grey;
+            color: var(--tab-active-color, #7cc7fb);
+        }
+        .selected-tab-content {
+            padding: 20px;
+            background: var(--tabs-bg, grey);
+        }
+        .mainTabs.selected-tab-content {
+            min-height: calc(100vh - var(--footer-height) - var(--header-height) - 150px);
         }
     </style>
     <div class="tabs-content"></div>

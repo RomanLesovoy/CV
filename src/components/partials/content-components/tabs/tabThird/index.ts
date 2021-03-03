@@ -1,4 +1,5 @@
-import HtmlElementExtended from '../../HtmlElementExtended';
+import HtmlElementExtended from '../../../../HtmlElementExtended';
+import tabThird from './tabThird.html';
 
 export class TabThird extends HtmlElementExtended {
   constructor() {
@@ -7,11 +8,7 @@ export class TabThird extends HtmlElementExtended {
       child: this,
       bindTemplate: true,
       templateSelector: '#tabThird',
-      template: `
-        <template id="tabThird">
-           <p>Text 3</p>
-        </template>
-      `,
+      template: tabThird,
     });
   }
 }

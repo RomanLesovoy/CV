@@ -12,6 +12,7 @@ export default class Header extends HtmlElementExtended {
       bindTemplate: true,
       templateSelector: '#header',
       template: headerDom,
+      requiredChildElementsSelectors: ['#header-text-content'],
     });
   }
   connectedCallback() {

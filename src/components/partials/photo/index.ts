@@ -8,12 +8,12 @@ export default class Photo extends HtmlElementExtended {
   image: any;
   constructor() {
     super();
-    singleton(Photo, this);
     super.run({
       child: this,
       bindTemplate: true,
       templateSelector: '#photo',
       template: photoDom,
+      requiredChildElementsSelectors: ['#photo-content'],
     });
     this.initImage();
   }

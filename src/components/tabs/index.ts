@@ -1,22 +1,23 @@
 import tabsDom from './tabs.html';
-import {executeIfExists, singleton, walkNodes} from '../../utils';
+import {executeIfExists, walkNodes} from '../../utils';
 import HtmlElementExtended from '../HtmlElementExtended';
 
 export default class Tabs extends HtmlElementExtended {
   shadow: HTMLBodyElement;
   tabs: HTMLBodyElement;
+  createdElementsNames: any;
   activeTab: any;
   tabContent: any;
   constructor() {
     super();
+    this.createdElementsNames = new Set();
     super.run({
       child: this,
       bindTemplate: true,
       templateSelector: '#tabs',
       template: tabsDom,
-      requiredChildElementsSelectors: ['.select-tabs'],
+      requiredChildElementsSelectors: ['.select-tabs', '.tabs-content', '.selected-tab-content'],
     });
-    singleton(Tabs, this);
   }
   connectedCallback() {
     this.style.flex = '1';
@@ -24,6 +25,7 @@ export default class Tabs extends HtmlElementExtended {
     this.setTabContent();
     this.setListenersOnTabs();
     this.setActiveTab();
+    this.setClasses();
   }
   setTabs() {
     const that = this;
@@ -47,6 +49,11 @@ export default class Tabs extends HtmlElementExtended {
           }
         },
       });
+    }
+  }
+  setClasses() {
+    if (!!this.getAttribute('mainTabs')) {
+      this.shadow.querySelector('.selected-tab-content').classList.add('mainTabs');
     }
   }
   setTabContent() {

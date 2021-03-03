@@ -1,6 +1,8 @@
 <template id="main">
     <style>
         main {
+            max-width: 1000px;
+            margin: 0 auto;
             padding: var(--main-content-gap);
             min-height: calc(100vh - var(--header-height) - var(--footer-height) - (var(--main-content-gap) * 2));
         }
@@ -9,15 +11,20 @@
             color: var(--main-content-color);
             background-color: var(--main-content-bg);
         }
+        @media all and (max-width: 900px) {
+            #main-content {
+                flex-direction: column;
+            }
+        }
     </style>
     <main>
         <div id="main-content">
-            <app-photo photoPath="/images/photo.jpg"></app-photo>
-            <app-tabs>
+            <app-tabs mainTabs="1">
                 <div class="select-tabs">
-                    <span data-component-name="app-tabfirst">Skills</span>
-                    <span data-component-name="app-tabsecond">Experience</span>
-                    <span data-component-name="app-tabthird">Education</span>
+                    <span data-component-name="app-tabfirst">Profile</span>
+                    <span data-component-name="app-tabsecond">Skills</span>
+                    <span data-component-name="app-tabthird">Experience</span>
+                    <span data-component-name="app-tabfourth">Education</span>
                 </div>
             </app-tabs>
         </div>

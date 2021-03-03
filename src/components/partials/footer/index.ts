@@ -12,6 +12,7 @@ export default class Footer extends HtmlElementExtended {
       bindTemplate: true,
       templateSelector: '#footer',
       template: footerDom,
+      requiredChildElementsSelectors: ['#footer-text-content'],
     });
   }
   connectedCallback() {
@@ -19,7 +20,7 @@ export default class Footer extends HtmlElementExtended {
       searchIn: this.shadow,
       selector: '#footer-text-content',
       callback: function(content: HTMLBodyElement) {
-        content.innerHTML = `2021 - ${new Date().getFullYear()}`;
+        content.innerHTML = `FULL-STACK WEB DEVELOPER`;
       },
     });
   }

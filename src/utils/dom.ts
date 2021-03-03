@@ -58,6 +58,12 @@ interface WalkNods {
   from: HTMLBodyElement | any,
   func: Function,
 }
+
+/**
+ * Walk through nodes and call callback
+ * @param from
+ * @param func
+ */
 export function walkNodes({ from, func }: WalkNods) {
   for (let i = 0; i < from.children.length; i++) {
     const child = from.children[i];
@@ -65,4 +71,25 @@ export function walkNodes({ from, func }: WalkNods) {
       func(child);
     }
   }
+}
+
+interface AnimateTextTyping {
+  element: HTMLBodyElement,
+  text: string,
+  delay: number,
+}
+
+/**
+ * Animate text typing
+ * @param element
+ * @param text
+ * @param delay
+ */
+export function animateTextTyping({ element, text, delay }: AnimateTextTyping) {
+  (function recursiveAddLetters(i = 0) {
+    element.textContent += text[i];
+    if (i < text.length - 1) {
+      setTimeout(() => recursiveAddLetters(i + 1), delay);
+    }
+  })();
 }

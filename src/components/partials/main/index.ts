@@ -11,6 +11,7 @@ export default class Main extends HtmlElementExtended {
       bindTemplate: true,
       templateSelector: '#main',
       template: mainDom,
+      requiredChildElementsSelectors: ['#main-content'],
     });
   }
 }

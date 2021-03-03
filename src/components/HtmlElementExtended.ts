@@ -10,13 +10,13 @@ interface InterfaceChildObject {
 }
 export default class HtmlElementExtended extends HTMLElement {
   protected run(childObject: InterfaceChildObject) {
-    const valid = this.validate(childObject);
+    if (childObject.bindTemplate) {
+      HtmlElementExtended.bindTemplate(childObject);
+    }
+    const valid = HtmlElementExtended.validate(childObject);
     if (!valid) {
       childObject.child = undefined;
       return false;
-    }
-    if (childObject.bindTemplate) {
-      HtmlElementExtended.bindTemplate(childObject);
     }
     return true;
   }
@@ -28,11 +28,11 @@ export default class HtmlElementExtended extends HTMLElement {
       mode: childObject.mode || ShadowMods.Closed,
     });
   }
-  private validate(childObject: InterfaceChildObject) {
+  private static validate(childObject: InterfaceChildObject) {
     let valid = true;
     if (childObject.requiredChildElementsSelectors) {
       childObject.requiredChildElementsSelectors.forEach((componentSelector: string) => {
-        if (!childObject.child.querySelector(componentSelector)) {
+        if (!childObject.child.querySelector(componentSelector) && !childObject.child.shadow?.querySelector(componentSelector)) {
           valid = false;
           throw new Error(`${childObject.child.constructor.name} should contain {${componentSelector}} element`);
         }

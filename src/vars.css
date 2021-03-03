@@ -19,5 +19,12 @@
 
     /* common */
     --border-default: 2px solid black;
+    --p-line-hiight: 26px;
+
+    /* tabs */
+    --tabs-bg: grey;
+    --tab-active-color: #7cc7fb;
+    --tab-hover-color: #81b3d0;
+    --tab-item-bg-color: #252525;
 }
 
