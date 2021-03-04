@@ -68,7 +68,7 @@ export function walkNodes({ from, func }: WalkNods) {
   for (let i = 0; i < from.children.length; i++) {
     const child = from.children[i];
     if (typeof child === 'object') {
-      func(child);
+      func(child, i);
     }
   }
 }

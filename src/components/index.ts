@@ -4,16 +4,12 @@ import Main from './partials/main';
 import App from './app/app';
 import Tabs from './tabs';
 import Photo from './partials/photo';
-import { TabFirst, TabSecond, TabThird, TabFourth, TabExperienceFirst } from './partials/content-components';
+import { Tab } from './partials/content-components';
 
 import { componentName } from '../utils';
 
-export const createdElementsNamesSaved = new Set();
-
 export const components: Array<CustomElementConstructor> = [
-  Header, Footer, Main, Tabs, Photo,
-  TabFirst, TabSecond, TabThird, TabFourth, TabExperienceFirst,
-  App,
+  Header, Footer, Main, Tabs, Photo, Tab, App,
 ];
 
 function defineComponents(components: Array<CustomElementConstructor>) {

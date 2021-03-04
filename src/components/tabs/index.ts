@@ -1,6 +1,7 @@
 import tabsDom from './tabs.html';
 import {executeIfExists, walkNodes} from '../../utils';
 import HtmlElementExtended from '../HtmlElementExtended';
+import {Tab, templateKey, animateTextKey} from '../partials/content-components';
 
 export default class Tabs extends HtmlElementExtended {
   shadow: HTMLBodyElement;
@@ -8,9 +9,12 @@ export default class Tabs extends HtmlElementExtended {
   createdElementsNames: any;
   activeTab: any;
   tabContent: any;
+  animateChildText: boolean;
   constructor() {
     super();
     this.createdElementsNames = new Set();
+    this.animateChildText = true;
+    this.tabContent = new Tab();
     super.run({
       child: this,
       bindTemplate: true,
@@ -52,8 +56,13 @@ export default class Tabs extends HtmlElementExtended {
     }
   }
   setClasses() {
-    if (!!this.getAttribute('mainTabs')) {
-      this.shadow.querySelector('.selected-tab-content').classList.add('mainTabs');
+    const contentClassNames = this.getAttribute('contentClassNames');
+    const tabsClassNames = this.getAttribute('tabsClassNames');
+    if (contentClassNames) {
+      this.tabContent.classList.add(contentClassNames);
+    }
+    if (tabsClassNames) {
+      this.tabs.classList.add(tabsClassNames);
     }
   }
   setTabContent() {
@@ -67,28 +76,42 @@ export default class Tabs extends HtmlElementExtended {
     })
   }
   setListenersOnTabs() {
-    for (let i = 0; i < this.tabs.children.length; i++) {
-      /* @ts-ignore */
-      this.tabs.children[i].onclick = function() {
-        this.setActiveTab(i);
-      }.bind(this);
+    walkNodes({
+      from: this.tabs,
+      func: (child: HTMLElement, i: number) => {
+        child.onclick = () => this.setActiveTab(i);
+      }
+    });
+  }
+  toggleClassOnTab(tab: HTMLElement) {
+    const activeClass = 'active';
+    if (tab) {
+      tab.classList.toggle(activeClass);
     }
   }
   setActiveTab(tab: number = 0) {
-    const activeClass = 'active';
-    if (this.tabs.children[tab]) {
-      if (this.activeTab) {
-        this.activeTab.classList.remove(activeClass);
-      }
-      this.activeTab = this.tabs.children[tab];
-      this.activeTab.classList.add(activeClass);
-      this.setSelectedTabContent(this.activeTab.getAttribute('data-component-name'));
-    }
+    this.toggleClassOnTab(this.activeTab);
+    this.activeTab = this.tabs.children[tab];
+    this.toggleClassOnTab(this.activeTab);
+    this.setSelectedTabContent();
   }
-  setSelectedTabContent(componentNameToShow: string) {
-    while (this.tabContent.lastElementChild) {
+  createNewTabContent() {
+    const tab = new Tab();
+    tab.setAttribute(templateKey, this.activeTab.getAttribute('data-content'));
+    if (this.animateChildText) { // just once
+      tab.setAttribute(animateTextKey, "1");
+      this.animateChildText = false;
+    }
+    return tab;
+  }
+  clearSelectedTabContent() {
+    while (this.tabContent?.lastElementChild) {
       this.tabContent.removeChild(this.tabContent.lastElementChild);
     }
-    this.tabContent.appendChild(document.createElement(componentNameToShow));
+  }
+  setSelectedTabContent() {
+    this.clearSelectedTabContent();
+    const tab = this.createNewTabContent();
+    this.tabContent.appendChild(tab);
   }
 }
