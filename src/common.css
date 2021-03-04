@@ -8,3 +8,38 @@ body {
     box-sizing: border-box;
     font-family: 'Roboto Mono', monospace;
 }
+
+a {
+    font-weight: 300;
+    color: var(--link-color, #ffffff);
+}
+
+a:visited {
+    color: var(--link-visited, #7cc7fb);
+}
+
+h2 {
+    margin-top: 0;
+}
+
+h4 {
+    color: var(--h4-color, #252525);
+    font-weight: 500;
+}
+
+p {
+    line-height: var(--p-line-hiight);
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-color, grey);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-color, #888888);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover-color, #656565);
+}

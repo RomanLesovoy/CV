@@ -3,6 +3,7 @@ import experience from './mainTabs/tabExperience.html';
 import skills from './mainTabs/tabSkills.html';
 import education from './mainTabs/tabEducation.html';
 import profile from './mainTabs/tabProfile.html';
+import contacts from './mainTabs/tabContacts.html';
 
 /* Experience */
 import upwork from './experienceTabs/tabUpwork.html';
@@ -22,6 +23,7 @@ export default {
   skills,
   education,
   profile,
+  contacts,
 
   upwork,
   shiftmarkets,

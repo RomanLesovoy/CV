@@ -20,6 +20,12 @@
     /* common */
     --border-default: 2px solid black;
     --p-line-hiight: 26px;
+    --h4-color: #252525;
+    --link-color: #fff;
+    --link-visited: #7cc7fb;
+    --scrollbar-track-color: grey;
+    --scrollbar-thumb-color: #888888;
+    --scrollbar-thumb-hover-color: #656565;
 
     /* tabs */
     --tabs-bg: grey;

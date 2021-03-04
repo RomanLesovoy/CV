@@ -25,7 +25,7 @@ export default class HtmlElementExtended extends HTMLElement {
       object: childObject.child,
       template: childObject.template,
       selector: childObject.templateSelector,
-      mode: childObject.mode || ShadowMods.Closed,
+      mode: childObject.mode || ShadowMods.Open,
     });
   }
   private static validate(childObject: InterfaceChildObject) {
