@@ -52,7 +52,7 @@ export const globalCss = `
     text-align: center;
     cursor: help;
   }
-  .skill-item:hover .skill-item-tooltip {
+  .skill-item:hover .skill-item-tooltip, .skill-item:active .skill-item-tooltip {
     display: block;
   }
   .skill-item.high {
