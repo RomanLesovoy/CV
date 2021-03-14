@@ -22,17 +22,24 @@ export const globalCss = `
     flex-wrap: wrap;
   }
   .skill-item-tooltip {
-    position: absolute;
+    /*position: absolute;*/
     display: none;
     background: var(--tab-item-bg-color, #252525);
-    padding: 5px;
+    padding: 5px 10px;
     font-size: 11px;
     z-index: 100;
     border-radius: 4px;
-    top: calc(100% + 6px);
+    /*top: calc(100% + 6px);*/
     text-align: left;
-    min-width: 150px;
-    left: 0;
+    min-width: 250px;
+    /*left: 0;*/
+    /*max-height: 250px;*/
+    /*overflow-y: auto;*/
+    
+    position: fixed;
+    top: calc(100% - 110px);
+    left: 50%;
+    transform: translate(-50%, -100%);
   }
   .skill-item {
     min-width: 100px;
@@ -41,6 +48,7 @@ export const globalCss = `
     border-radius: 20px;
     background-color: transparent;
     margin: 5px;
+    font-size: 13px;
     text-align: center;
     cursor: help;
   }
