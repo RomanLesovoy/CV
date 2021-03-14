@@ -1,4 +1,5 @@
 import {bindTemplate, ShadowMods} from '../utils';
+import {globalCss} from '../globalCss';
 
 interface InterfaceChildObject {
   child: any, // fixme
@@ -27,6 +28,17 @@ export default class HtmlElementExtended extends HTMLElement {
       selector: childObject.templateSelector,
       mode: childObject.mode || ShadowMods.Open,
     });
+    HtmlElementExtended.bindStyles(childObject.child.shadow);
+  }
+  private static bindStyles(component: HTMLElement | ShadowRoot) {
+    if (component?.append) {
+      const style = document.createElement('style');
+      const parsed = new DOMParser()
+        .parseFromString(globalCss, 'text/html')
+        .getElementsByTagName('style');
+      style.innerHTML = parsed[0].innerHTML;
+      component.prepend(style);
+    }
   }
   private static validate(childObject: InterfaceChildObject) {
     let valid = true;

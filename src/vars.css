@@ -19,13 +19,18 @@
 
     /* common */
     --border-default: 2px solid black;
-    --p-line-hiight: 26px;
+    --p-line-height: 26px;
+    --span-line-height: 20px;
     --h4-color: #252525;
     --link-color: #fff;
     --link-visited: #7cc7fb;
     --scrollbar-track-color: grey;
-    --scrollbar-thumb-color: #888888;
+    --scrollbar-thumb-color: #bf4a4a;
     --scrollbar-thumb-hover-color: #656565;
+    --table-odd-color: #333333;
+    --table-even-color: #555555;
+    --skill-middle: #efa828;
+    --skill-high: #49b749;
 
     /* tabs */
     --tabs-bg: grey;

@@ -114,4 +114,11 @@ export default class Tabs extends HtmlElementExtended {
     const tab = this.createNewTabContent();
     this.tabContent.appendChild(tab);
   }
+  setRoute() {
+    // todo
+    // window.history.pushState({}, pathname, window.location.origin + pathname);
+  }
+  setContentFromRoute() {
+    // todo
+  }
 }

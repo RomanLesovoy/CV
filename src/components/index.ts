@@ -15,7 +15,7 @@ export const components: Array<CustomElementConstructor> = [
 function defineComponents(components: Array<CustomElementConstructor>) {
   components.forEach((component) => {
     customElements.define(componentName(component), component);
-  })
+  });
 }
 defineComponents(components);
 

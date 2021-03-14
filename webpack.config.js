@@ -6,8 +6,17 @@ module.exports = {
   entry: './src/index.ts',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    compress: true,
+    compress: false,
     port: 9000,
+    historyApiFallback: true,
+    proxy: [
+      {
+        context: '**',
+      },
+    ]
+  },
+  optimization: {
+    minimize: false,
   },
   module: {
     rules: [
@@ -35,7 +44,7 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: [
           {
             loader: 'style-loader',

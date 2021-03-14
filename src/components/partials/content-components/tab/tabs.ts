@@ -15,7 +15,8 @@ import devcottege from './experienceTabs/tabDevcottege.html';
 /* Skills */
 import frameworksJs from './skillsTabs/tabJsFrameworks.html';
 import nativeJs from './skillsTabs/tabJsnative.html';
-import nodeJs from './skillsTabs/tabNodeJs.html';
+import databases from './skillsTabs/tabDatabases.html';
+import other from './skillsTabs/tabOther.html';
 import php from './skillsTabs/tabPhp.html';
 
 export default {
@@ -33,6 +34,7 @@ export default {
 
   frameworksJs,
   nativeJs,
-  nodeJs,
+  databases,
+  other,
   php,
 }
