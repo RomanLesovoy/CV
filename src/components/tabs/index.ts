@@ -34,7 +34,11 @@ export default class Tabs extends HtmlElementExtended {
     this.setTabContent();
     this.setListenersOnTabs();
     this.setClasses();
-    this.findTabAndSetByRoute(window.location.pathname);
+    if (this.isMainRoutes) {
+      this.findTabAndSetByRoute(window.location.pathname);
+    } else {
+      this.setActiveTab();
+    }
   }
   setTabs() {
     const that = this;
