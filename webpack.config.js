@@ -7,12 +7,15 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: false,
+    publicPath: '',
+    hot: true,
+    inline: true,
     port: 9000,
     historyApiFallback: true,
     proxy: [
       {
-        context: '**',
-      },
+        context: () => true,
+      }
     ]
   },
   optimization: {

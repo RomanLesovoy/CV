@@ -3,7 +3,7 @@ import {animateTextTyping} from '../../../../utils';
 import tabsContent from './tabs';
 
 export const templateKey = 'template';
-export const animateTextKey = 'animateText';
+export const animateTextKey = 'data-animate-text';
 
 export class Tab extends HtmlElementExtended {
   shadow: HTMLBodyElement;

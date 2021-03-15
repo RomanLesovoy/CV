@@ -1,5 +1,5 @@
 import tabsDom from './tabs.html';
-import {executeIfExists, walkNodes} from '../../utils';
+import {executeIfExists, walkNodes, setRoute, textToUrl} from '../../utils';
 import HtmlElementExtended from '../HtmlElementExtended';
 import {Tab, templateKey, animateTextKey} from '../partials/content-components';
 
@@ -10,6 +10,7 @@ export default class Tabs extends HtmlElementExtended {
   activeTab: any;
   tabContent: any;
   animateChildText: boolean;
+  isMainRoutes: boolean;
   constructor() {
     super();
     this.createdElementsNames = new Set();
@@ -23,13 +24,17 @@ export default class Tabs extends HtmlElementExtended {
       requiredChildElementsSelectors: ['.select-tabs', '.tabs-content', '.selected-tab-content'],
     });
   }
+  tabRoute(tab: HTMLElement) {
+    return tab.getAttribute('data-content') || '';
+  }
   connectedCallback() {
+    this.isMainRoutes = !!this.getAttribute('routes');
     this.style.flex = '1';
     this.setTabs();
     this.setTabContent();
     this.setListenersOnTabs();
-    this.setActiveTab();
     this.setClasses();
+    this.findTabAndSetByRoute(window.location.pathname);
   }
   setTabs() {
     const that = this;
@@ -94,11 +99,12 @@ export default class Tabs extends HtmlElementExtended {
     this.activeTab = this.tabs.children[tab];
     this.toggleClassOnTab(this.activeTab);
     this.setSelectedTabContent();
+    this.setRoute();
   }
   createNewTabContent() {
     const tab = new Tab();
-    tab.setAttribute(templateKey, this.activeTab.getAttribute('data-content'));
-    if (this.animateChildText) { // just once
+    tab.setAttribute(templateKey, this.tabRoute(this.activeTab));
+    if (this.animateChildText && this.tabRoute(this.activeTab) === 'profile') { // just once
       tab.setAttribute(animateTextKey, "1");
       this.animateChildText = false;
     }
@@ -114,11 +120,27 @@ export default class Tabs extends HtmlElementExtended {
     const tab = this.createNewTabContent();
     this.tabContent.appendChild(tab);
   }
-  setRoute() {
-    // todo
-    // window.history.pushState({}, pathname, window.location.origin + pathname);
+  getTabUrl(tab: HTMLElement) {
+    return textToUrl(this.tabRoute(tab));
   }
-  setContentFromRoute() {
-    // todo
+  setRoute() {
+    setRoute(
+      {
+        newPathname: `/${this.getTabUrl(this.activeTab)}`,
+        isMainRoute: !!this.isMainRoutes,
+      });
+  }
+  findTabAndSetByRoute(route: string) {
+    if (!textToUrl(route)) {
+      route = 'profile';
+    }
+    walkNodes({
+      from: this.tabs,
+      func: (child: HTMLElement, i: number) => {
+        if (this.getTabUrl(child) === textToUrl(route)) {
+          this.setActiveTab(i);
+        }
+      }
+    });
   }
 }
