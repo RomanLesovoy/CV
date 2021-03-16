@@ -1,6 +1,8 @@
 const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
   entry: './src/index.ts',
@@ -80,6 +82,25 @@ module.exports = {
         { from: path.resolve(__dirname, "assets/images"), to: path.resolve(__dirname, "dist/images") },
         { from: path.resolve(__dirname, "src/common.css"), to: path.resolve(__dirname, "dist/common.css") },
       ],
+    }),
+    new WebpackManifestPlugin({
+      fileName: 'asset-manifest.json', // Not to confuse with manifest.json
+    }),
+    new WorkboxPlugin.GenerateSW({
+      // these options encourage the ServiceWorkers to get in there fast
+      // and not allow any straggling "old" SWs to hang around
+      clientsClaim: true,
+      skipWaiting: true,
+      mode: "production",
+      navigationPreload: true,
+      navigateFallback: "/index.html",
+      runtimeCaching: [
+        {
+          // You can use a RegExp as the pattern:
+          urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+          handler: 'CacheFirst',
+        },
+      ]
     }),
   ]
 };
