@@ -5,6 +5,7 @@ export const globalCss = `
       grid-template-columns: 0.3fr 1fr;
       grid-template-rows: 1fr;
       margin-bottom: 10px;
+      width: 100%;
   }
   .skill-row > * {
       height: 100%;
@@ -63,5 +64,8 @@ export const globalCss = `
   }
   .skill-item.middle {
     background-color: var(--skill-middle, #efa828);
+  }
+    .skill-item.low {
+    background-color: var(--skill-low, #ef7e28);
   }
 </style>`;

@@ -38,7 +38,7 @@ export class Tab extends HtmlElementExtended {
     animateTextTyping({
       element: this.contentElement,
       text: this.contentToShow,
-      delay: 10,
+      delay: 7,
     });
   }
   beforeAnimateText() {
