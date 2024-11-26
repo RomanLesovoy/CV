@@ -11,6 +11,7 @@ import shiftmarkets from './experienceTabs/tabShiftmarkets.html';
 import daewoosales from './experienceTabs/tabDaewoosales.html';
 import devbrother from './experienceTabs/tabDevbrother.html';
 import devcottege from './experienceTabs/tabDevcottege.html';
+import devEka from './experienceTabs/tabDevEka.html';
 
 /* Skills */
 import frameworksJs from './skillsTabs/tabJsFrameworks.html';
@@ -32,6 +33,7 @@ export default {
   daewoosales,
   devbrother,
   devcottege,
+  devEka,
 
   frameworksJs,
   nativeJs,
