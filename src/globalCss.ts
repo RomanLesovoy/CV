@@ -23,19 +23,14 @@ export const globalCss = `
     flex-wrap: wrap;
   }
   .skill-item-tooltip {
-    /*position: absolute;*/
     display: none;
     background: var(--tab-item-bg-color, #252525);
-    padding: 5px 10px;
-    font-size: 11px;
     z-index: 100;
     border-radius: 4px;
-    /*top: calc(100% + 6px);*/
     text-align: left;
     min-width: 250px;
-    /*left: 0;*/
-    /*max-height: 250px;*/
-    /*overflow-y: auto;*/
+    padding: 15px 20px;
+    font-size: 15px;
     
     position: fixed;
     top: calc(100% - 110px);
